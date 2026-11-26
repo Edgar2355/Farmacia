@@ -1,0 +1,3 @@
+# Asegurar saltos de linea LF en scripts de Linux (.sh) para evitar errores de ejecucion en Bash
+*.sh text eol=lf
+*.bat text eol=crlf

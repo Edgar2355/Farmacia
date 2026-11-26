@@ -1,4 +1,6 @@
 import os
+import sys
+import subprocess
 import tkinter as tk
 from tkinter import ttk, messagebox, END
 from pathlib import Path
@@ -160,7 +162,17 @@ class FacturasView(tk.Toplevel):
 
     def abrir_carpeta_pdfs(self):
         os.makedirs(self.carpeta_facturas, exist_ok=True)
+        ruta_str = str(self.carpeta_facturas)
         try:
-            os.startfile(str(self.carpeta_facturas))
+            if hasattr(os, "startfile"):
+                os.startfile(ruta_str)
+            elif sys.platform.startswith("darwin"):
+                subprocess.Popen(["open", ruta_str])
+            else:
+                subprocess.Popen(["xdg-open", ruta_str])
         except Exception as e:
-            messagebox.showinfo("Ruta de Facturas", f"Las facturas PDF se encuentran en:\n{self.carpeta_facturas}\n({e})", parent=self)
+            messagebox.showinfo(
+                "Ruta de Facturas",
+                f"Las facturas PDF se encuentran en:\n{ruta_str}\n({e})",
+                parent=self,
+            )

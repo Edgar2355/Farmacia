@@ -66,7 +66,7 @@ buttonmap_rechazar = {
 
 
 def maximizar_ventana(ventana, ancho_base=1100, alto_base=720):
-    """Abre cualquier ventana Tk o Toplevel en formato de ventana completa (maximizada en Windows)."""
+    """Abre cualquier ventana Tk o Toplevel en formato de ventana completa (compatible con Windows, Linux y macOS)."""
     ventana.resizable(True, True)
     ventana.update_idletasks()
     sw = ventana.winfo_screenwidth()
@@ -74,13 +74,28 @@ def maximizar_ventana(ventana, ancho_base=1100, alto_base=720):
     x = max(0, (sw - ancho_base) // 2)
     y = max(0, (sh - alto_base) // 2)
     ventana.geometry(f"{ancho_base}x{alto_base}+{x}+{y}")
-    try:
-        ventana.state("zoomed")
-    except Exception:
+
+    # 1. En Linux / X11 / Wayland la forma estándar de maximizar en Tk es attributes("-zoomed", True)
+    import sys
+    if sys.platform.startswith("linux"):
         try:
             ventana.attributes("-zoomed", True)
+            return
         except Exception:
-            ventana.geometry(f"{sw}x{sh}+0+0")
+            pass
+
+    # 2. En Windows / macOS se utiliza state("zoomed")
+    try:
+        ventana.state("zoomed")
+        return
+    except Exception:
+        pass
+
+    # 3. Fallback universal a las dimensiones completas del monitor
+    try:
+        ventana.attributes("-zoomed", True)
+    except Exception:
+        ventana.geometry(f"{sw}x{sh}+0+0")
 
 
 def centrar_ventana(ventana, ancho, alto, maximizar=True):
