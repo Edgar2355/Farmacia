@@ -1,0 +1,39 @@
+# ==============================================================================
+# .gitignore - Sistema de Gestión Farmacia CUCEI
+# Mantiene privados secretos, entornos virtuales, cachés y archivos generados
+# ==============================================================================
+
+# 1. Credenciales, Secretos y Configuración Local de Conexión / Túneles
+.env
+*.env
+!*.env.example
+!.env.example
+Recursos/Menus/Ventas/Gemini_api.env
+Recursos/db_config.json
+
+# 2. Entornos Virtuales de Python (Librerias y artefactos de venv)
+Librerias/
+Include/
+Lib/
+Scripts/
+pyvenv.cfg
+.venv/
+venv/
+ENV/
+
+# 3. Caché de Python y Archivos Compilados
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# 4. Documentos Fiscales PDF y Reportes Generados en Ejecución
+/Facturas/
+*.pdf
+*.csv
+
+# 5. Archivos de Sistema Operativo e IDEs
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

@@ -1,0 +1,4 @@
+fpdf2==2.8.7
+mysql-connector-python
+google-genai
+python-dotenv==1.2.4

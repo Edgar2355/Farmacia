@@ -1,0 +1,16 @@
+Versión 3.0 (Mejora Integral de Arquitectura y Calidad de Software):
+
+- Corrección de bugs críticos en Sucursales (DELETE en tabla correcta y firma de métodos), Productos (inclusión y filtrado de sucursal_id) y parseo de IDs de sucursal de múltiples dígitos.
+- Refactorización arquitectónica con paquete de Servicios Transversales (Recursos/Servicios/contexto_sucursal.py y validaciones.py).
+- Desacoplamiento de factura.py respecto a messagebox de Tkinter y envío de correos SMTP asíncrono en segundo plano (threading).
+- Nuevos módulos completos: Gestión de Usuarios y Roles (CRUD) y Visor/Historial de Facturas con envío automático de factura PDF al correo del cliente en Ventas.
+- Tablas interactivas (Treeview) con búsqueda en tiempo real en Clientes, Productos (con alerta visual de stock bajo <= 5), Sucursales y Proveedores (incluyendo campo dirección).
+- Nuevos reportes (Productos más vendidos, Stock crítico, Facturas agrupadas por folio real) y exportación a CSV.
+- Asistente Farmacéutico IA (Gemini) asíncrono enriquecido con el catálogo y stock real de la sucursal activa.
+- Suite de pruebas unitarias automatizadas en tests/test_calidad_farmacia.py.
+
+Versión 2.1:
+
+-Se añadió el archivo .env para poner las credenciales de gemini y hacer funcionar el chat con IA
+-Se añadió la plantilla para crear la base de datos
+-Se añadió el archivo de "requirements.txt"
